@@ -1,0 +1,68 @@
+.schedule{
+    font-size: 12px;
+    position: relative;
+    padding: 30px 0;
+    background: #efeff4;
+}
+.schedule-scale-container{
+    float: left;
+    padding:0 10px;
+    width: 3em; 
+    position: relative;
+    height: 100%;
+}
+.schedule-scale-cell{
+    line-height: 1em;
+    margin-top: -.5em;
+    position: absolute;
+}
+.schedule-content{
+    display: table-cell;
+    width: 20000px;
+    height: inherit;
+    position: relative;
+}
+.schedule-auxiliaryLine-container{
+    height: inherit;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.schedule-auxiliaryLine{
+    position: absolute;
+    border-bottom: none;
+    margin: 0;
+    width: 100%;
+}
+.schedule-current-top{
+    position: absolute;
+    background: red;
+    color: white;
+    border-radius: 10px;
+    padding:0 .5em;
+    right: 0;
+    margin-top: -.5em;
+}
+.schedule-current-mask{
+    background: rgba(0,0,0,.1);
+    width: 100%;
+    position: absolute;
+    top:0;
+    left:0;
+    border-bottom: 1px solid red;
+}
+.schedule-item-container{
+    background: white;
+    height: inherit;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.schedule-item{
+    position: absolute;
+    width: 100%;
+    cursor: pointer;
+}
+

@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jquery-schedule</title>
+    <link rel="stylesheet" href="./jquery-schedule/jquery-schedule.css">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="./jquery-schedule/jquery-schedule.js"></script>
+    <style>
+        .schedule{
+            height: 800px;
+        }
+    </style>
+</head>
+<body>
+    <div id="schedule">
+
+    </div>
+    <script>
+        //将字符串的时间转换为毫秒
+        function transformTimeStrToMillisecond(time){
+            var time = time.split(/\s*:\s*/);
+            var hour = time[0]||0;
+            var minute = time[1]||0;
+            return (hour*60+(+minute))*60*1000;
+        }
+        //毫秒将转换为字符串的时间
+        function transformMillisecondToTimeStr(millisecond){
+            var hour = Math.floor(millisecond/(60*60*1000));
+                var minute = Math.floor(millisecond%(60*60*1000)/(60*1000));
+                hour = (100+hour+"").slice(1);
+                minute = (100+minute+"").slice(1);
+                return hour+":"+minute;
+        }
+        $("#schedule").schedule({
+            timeScale:{
+                startTime:(6*60+20)*60*1000,
+                endTime:(23*60+30)*60*1000,
+                timeInterval:60*60*1000
+            },
+            click:function(currentData,data,idx,e){
+                console.log(this);
+                console.log(currentData);
+                console.log(data);
+                console.log(idx);
+                console.log(e);
+            },
+            data:[{
+                startTime:transformTimeStrToMillisecond("08:30"),
+                endTime:transformTimeStrToMillisecond("09:00"),
+                text:"这是王琼到公司的时间"
+            }],
+            formatter:function(item){
+                return transformMillisecondToTimeStr(item.startTime)+"-"+transformMillisecondToTimeStr(item.endTime)+" "+item.text;
+            }
+        });
+        $("#schedule").schedule("setData",[{
+                startTime:transformTimeStrToMillisecond("11:30"),
+                endTime:transformTimeStrToMillisecond("12:30"),
+                text:"这是王琼吃饭的时间"
+            },{
+                startTime:transformTimeStrToMillisecond("13:00"),
+                endTime:transformTimeStrToMillisecond("14:00"),
+                text:"这是王琼午睡的时间"
+            },{
+                startTime:transformTimeStrToMillisecond("14:00"),
+                endTime:transformTimeStrToMillisecond("18:00"),
+                text:"这是王琼下午上班的时间"
+            }]);
+    </script>
+</body>
+</html>
