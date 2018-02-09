@@ -53,7 +53,8 @@
             }],
             formatter:function(item){
                 return transformMillisecondToTimeStr(item.startTime)+"-"+transformMillisecondToTimeStr(item.endTime)+" "+item.text;
-            }
+            },
+            showMask:"normal"
         });
         $("#schedule").schedule("setData",[{
                 startTime:transformTimeStrToMillisecond("11:30"),

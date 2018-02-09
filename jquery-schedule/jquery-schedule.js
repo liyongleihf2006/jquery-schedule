@@ -23,7 +23,8 @@
  *      },...],
  *      formatter:function(item){//格式化日程安排条,item是当前日程数据
  *          return item.text;
- *      }
+ *      },
+ *      showMask:"normal",//是否显示时间遮罩,normal:遮罩会把当前时间之前的范围盖住,cover:遮罩会把整个范围盖住,hide:遮罩不显示
  * }
  *method:
  *      setData(data)//传入日程安排数据  
@@ -85,7 +86,8 @@
         data:[],
         formatter:function(item){
             return item.text;
-        }
+        },
+        showMask:"normal"
     }
     function _init(params){
         return this;
@@ -137,7 +139,9 @@
                     }
                 }) 
             }),
-            _renderCurrentLabel.call($self)
+            function(){
+                return params.showMask==="normal"&&_renderCurrentLabel.call($self)
+            }()
         )
     }
     function _renderCurrentLabel(){
@@ -191,7 +195,13 @@
         now=new Date(),
         hour=now.getHours()*60*60*1000,
         minute=now.getMinutes()*60*1000,
-        height=(hour+minute-_beginTime)/(_finishTime-_beginTime)*100+"%";
+        height;
+        switch(params.showMask){
+            case "normal":height=(hour+minute-_beginTime)/(_finishTime-_beginTime)*100+"%";break;
+            case "cover":height="100%";break;
+            case "hide":height="0%";break;
+            default:throw new Error("the showMask's value must be \"normal\" or \"cover\" or  \"hide\"");break;
+        }
         return $("<div/>",{
             "class":"schedule-current-mask",
             "style":function(){
